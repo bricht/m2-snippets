@@ -1,0 +1,177 @@
+PROD DB CUSTOMER DATA ANONYMISATION
+
+select @i := 0;
+UPDATE customer_entity 
+    set email = CONCAT('JohnDoe' , (select @i := @i + 1), '@Briteskies.com');
+select @i := 0;
+UPDATE customer_entity 
+    set firstname = CONCAT('John' , (select @i := @i + 1));
+select @i := 0;
+UPDATE customer_entity 
+    set lastname = CONCAT('Doe' , (select @i := @i + 1));
+
+select @i := 0;
+UPDATE customer_address_entity 
+    set lastname = CONCAT('Doe' , (select @i := @i + 1));
+UPDATE customer_address_entity 
+    set firstname = CONCAT('John' , (select @i := @i + 1));
+select @i := 0;
+UPDATE customer_address_entity 
+    set postcode = 11111
+UPDATE customer_address_entity 
+    set street = 'Some Street 2'
+
+select @i := 0;
+UPDATE sales_order 
+    set customer_email = CONCAT('JohnDoe' , (select @i := @i + 1), '@Briteskies.com');
+select @i := 0;
+UPDATE sales_order 
+    set customer_firstname = CONCAT('John' , (select @i := @i + 1));
+select @i := 0;
+UPDATE sales_order 
+    set customer_lastname = CONCAT('Doe' , (select @i := @i + 1));
+
+select @i := 0;
+UPDATE organization_address_entity 
+    set company = CONCAT('DEVELOPMENT COMPANY' , (select @i := @i + 1));
+select @i := 0;
+UPDATE organization_address_entity 
+    set postcode = CONCAT('12345-1234');
+select @i := 0;
+UPDATE organization_address_entity 
+    set street = 'Some Street';
+select @i := 0;
+UPDATE organization_address_entity     
+    set telephone = 77777777777;
+
+select @i := 0;
+UPDATE quote 
+    set customer_email = CONCAT('JohnDoe' , (select @i := @i + 1), '@Briteskies.com');
+select @i := 0;
+UPDATE quote 
+    set customer_firstname = CONCAT('John' , (select @i := @i + 1));
+select @i := 0;
+UPDATE quote 
+    set customer_lastname = CONCAT('Doe' , (select @i := @i + 1));
+select @i := 0;
+UPDATE newsletter_subscriber 
+    set subscriber_email = CONCAT('JohnDoe' , (select @i := @i + 1), '@Briteskies.com');
+select @i := 0;
+UPDATE email_contact 
+    set email = CONCAT('JohnDoe' , (select @i := @i + 1), '@Briteskies.com'); 
+
+select @i := 0;
+UPDATE darley_velocitychecks_attempts 
+    set customer_email = CONCAT('JohnDoe' , (select @i := @i + 1), '@Briteskies.com'); 
+UPDATE darley_velocitychecks_attempts 
+    set customer_city = 'Some City';
+select @i := 0;
+UPDATE darley_velocitychecks_attempts 
+    set customer_street = CONCAT('Some Street' , (select @i := @i + 1));
+UPDATE darley_velocitychecks_attempts 
+    set customer_zip = '12345';
+UPDATE darley_velocitychecks_attempts 
+    set customer_ip = '172.69.11.111';
+
+select @i := 0;
+UPDATE customer_address_entity 
+    set company = 'Dev Value'; 
+UPDATE customer_address_entity 
+    set fax = '';
+select @i := 0;
+UPDATE customer_address_entity 
+    set lastname = CONCAT('Doe' , (select @i := @i + 1));
+select @i := 0;
+UPDATE customer_address_entity 
+    set firstname = CONCAT('John' , (select @i := @i + 1));
+UPDATE customer_address_entity 
+    set telephone = 77777777777;
+
+select @i := 0;
+UPDATE quote_address 
+    set email = CONCAT('JohnDoe' , (select @i := @i + 1), '@Briteskies.com'); 
+UPDATE quote_address 
+    set company = 'Dev Value';
+UPDATE quote_address 
+    set city = 'Some City';
+select @i := 0;
+UPDATE quote_address 
+    set postcode = '12345';
+UPDATE quote_address 
+    set telephone = '7777777777';
+UPDATE quote_address 
+    set firstname = NULL;
+UPDATE quote_address 
+    set lastname = NULL;
+
+select @i := 0;
+UPDATE aw_rp_transaction 
+    set customer_email = CONCAT('JohnDoe' , (select @i := @i + 1), '@Briteskies.com'); 
+select @i := 0;
+UPDATE aw_rp_transaction 
+    set customer_name = CONCAT('JohhnyBoi' , (select @i := @i + 1)); 
+
+select @i := 0;
+UPDATE sales_invoice_grid 
+    set customer_email = CONCAT('JohnDoe' , (select @i := @i + 1), '@Briteskies.com'); 
+select @i := 0;
+UPDATE sales_invoice_grid 
+    set customer_name = CONCAT('JohhnyBoi' , (select @i := @i + 1)); 
+select @i := 0;
+UPDATE sales_invoice_grid 
+    set billing_name = 'JohhnyBoi'; 
+UPDATE sales_invoice_grid 
+    set billing_address = '123 9th Av, Black Rock, Illinois, 11111';
+UPDATE sales_invoice_grid 
+    set shipping_address = '123 9th Av, Black Rock, Illinois, 11111';
+
+select @i := 0;
+UPDATE sales_order_grid 
+    set customer_email = CONCAT('JohnDoe' , (select @i := @i + 1), '@Briteskies.com'); 
+UPDATE sales_order_grid 
+	set billing_name = 'JohhnyBoi';
+UPDATE sales_order_grid 
+	set shipping_name = 'JohhnyBoi';
+UPDATE sales_order_grid 
+    set customer_name = 'JohhnyBoi'; 
+UPDATE sales_order_grid 
+    set billing_address = '123 9th Av, Black Rock, Illinois, 11111';
+UPDATE sales_order_grid 
+    set shipping_address = '123 9th Av, Black Rock, Illinois, 11111';
+
+select @i := 0;
+UPDATE sales_shipment_grid 
+    set customer_email = CONCAT('JohnDoe' , (select @i := @i + 1), '@Briteskies.com'); 
+UPDATE sales_shipment_grid 
+	set billing_name = 'JohhnyBoi';
+UPDATE sales_shipment_grid 
+	set shipping_name = 'JohhnyBoi';
+UPDATE sales_shipment_grid 
+    set customer_name = 'JohhnyBoi'; 
+UPDATE sales_shipment_grid 
+    set billing_address = '123 9th Av, Black Rock, Illinois, 11111';
+UPDATE sales_shipment_grid 
+    set shipping_address = '123 9th Av, Black Rock, Illinois, 11111';
+
+
+select @i := 0;
+UPDATE sales_order_address 
+    set email = CONCAT('JohnDoe' , (select @i := @i + 1), '@Briteskies.com'); 
+UPDATE sales_order_address 
+    set company = 'Dev Value';
+UPDATE sales_order_address 
+    set city = 'Some City';
+UPDATE sales_order_address 
+    set street = 'Some Street';
+UPDATE sales_order_address 
+    set postcode = '12345';
+UPDATE sales_order_address 
+    set telephone = '7777777777';
+select @i := 0;
+UPDATE sales_order_address 
+    set firstname = CONCAT('John' , (select @i := @i + 1));
+select @i := 0;
+UPDATE sales_order_address 
+    set lastname = CONCAT('Doe' , (select @i := @i + 1));
+UPDATE sales_order_address 
+    set fax = NULL;

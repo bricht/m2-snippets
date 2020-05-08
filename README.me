@@ -8,7 +8,6 @@ SELECT * FROM `core_config_data` WHERE `path` LIKE '%base_url%' ORDER BY `scope_
 SELECT * FROM `core_config_data` WHERE `path` LIKE '%catalog/search/engine%' ORDER BY `scope_id` LIMIT 50
 SELECT * FROM `core_config_data` WHERE `path` LIKE '%catalog/search%' AND `path` LIKE '%hostname%' ORDER BY `scope_id` LIMIT 50
 
-
 Disable merging and minifying locally
 	update `core_config_data` set `value` = 0 where `path` IN('dev/js/merge_files','dev/css/merge_css_files','dev/js/minify_files','dev/css/minify_files');
 
@@ -16,7 +15,7 @@ Set local urls
 	update `core_config_data` set `value` = 'http://local.yoursite.com/' where `path` IN('web/unsecure/base_url','web/secure/base_url');
 
 Adding admin user
-	admin:user:create --admin-user='devall' --admin-password='Option123' --admin-email='admin@admin.com' --admin-firstname='Admin' --admin-lastname='Admin'
+	admin:user:create --admin-user='jekabs' --admin-password='bryant4733' --admin-email='jeekabs@admin.com' --admin-firstname='Admin' --admin-lastname='Admin'
 
 Set developer mode
 	bin/magento deploy:mode:set developer
@@ -89,3 +88,41 @@ dockergento magento setup:install --base-url=http://local.test.lv/ --base-url-se
 
 Optional params for ES
 --es-hosts="elasticsearch:9200" --es-user="username" --es-pass="password"
+
+Msql core_config_data dump
+
+docker exec viking_db_1 mysqldump -u root -ppassword vikingdb_jan core_config_data > local_ccd.sql
+
+Get query string from Framework/DB/Select with $query->assemble();
+Or put echo $_productCollection->getSelect()->__toString(); in a template file.
+
+Switch to prod mode:
+dockergento magento deploy:de:set production --skip-compilation
+sudo rm -rf var/cache/* generated/* pub/static/* var/view_preprocessed/* var/page_cache/* var/generation/* dev/tests/integration/tmp/*
+sudo -u www-data php bin/magento setup:static-content:deploy lv_LV ru_RU et_EE lt_LT en_US --theme devall/hp
+sudo -u www-data php bin/magento setup:di:compile
+sudo -u www-data php bin/magento setup:static-content:deploy --theme Magento/backend
+
+Remove everything:
+rm -rf generated/code* generated/metadata/* pub/static/* var/cache* var/page_cache/* var/page_cache/* var/view_preprocessed/*
+
+DROP ALL TABLES
+First, disable foreign key check:
+echo "SET FOREIGN_KEY_CHECKS = 0;" > ./temp.sql
+
+Then dump the db with no data and drop all tables:
+mysqldump --add-drop-table --no-data -u root -p db_name | grep 'DROP TABLE' >> ./temp.sql
+
+Turn the foreign key check back on:
+echo "SET FOREIGN_KEY_CHECKS = 1;" >> ./temp.sql
+
+Now restore the db with the dump file:
+mysql -u root -p db_name < ./temp.sql
+
+UPDATE `customer_entity`
+SET `password_hash` = CONCAT(SHA2('xxxxxxxxOption123', 256), ':xxxxxxxx:1')
+WHERE `email` = 'tony.montana@darkskies.com';
+
+DUMP
+
+mysqldump -u root -p magento2 -h 192.168.100.244 | gzip > ur_live-01-05-2020.sql.gz
